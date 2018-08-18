@@ -388,6 +388,18 @@ public final class ModelLoader extends ModelBakery
                     {
                         model.parent = ((VanillaModelWrapper) parent).model;
                     }
+                    else if(parent instanceof FancyMissingModel)
+                    {
+                    	IModel missing = getMissingModel();
+                    	if(missing instanceof VanillaModelWrapper)
+                    	{
+                            model.parent = ((VanillaModelWrapper) missing).model;
+                    	}
+                    	else
+                    	{
+                            throw new IllegalStateException("base missing model must be a vanilla model");
+                    	}
+                    }
                     else
                     {
                         throw new IllegalStateException("vanilla model '" + model + "' can't have non-vanilla parent");
